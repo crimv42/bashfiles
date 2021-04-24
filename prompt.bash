@@ -63,8 +63,12 @@ reset="\[$(tput sgr0)\]";
 bold="\[$(tput bold)\]";
 
 # This will be the deafult prompt
-PS1="\$(kube_ps1)";
-PS1+="${pink}[";
+if ! [ -x "$(command -v kubectl)" ]; then
+    PS1="${pink}[";
+else
+    PS1="\$(kube_ps1)";
+    PS1+="${pink}[";
+fi
 PS1+="${TITLEBAR}${teal}\u";
 PS1+="${reset}${pink}@";
 PS1+="${reset}${pink2}${bold}\h";
