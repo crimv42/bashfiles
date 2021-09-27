@@ -1,0 +1,17 @@
+# bashfiles
+Bash Files
+
+Move the files to `~/.bashrc.d/` then add this to your .bashrc or .bash_profile:
+
+```
+# This churns through files in $HOME/.bashrc.d if they are executable.
+if [ -d $HOME/.bashrc.d ]; then
+    for x in $HOME/.bashrc.d/* ; do
+        if [[ "${x##*/}" != "bashrc.init" ]]; then
+            test -f "$x" || continue
+            test -x "$x" || continue
+            . "$x"
+        fi
+    done
+fi
+```
